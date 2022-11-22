@@ -3,12 +3,11 @@ package module3.oop;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BikeCategory extends Category {
-    public BikeCategory() {
-        super("Bikes");
-    }
+public class Category {
+    private String name;
 
-    private List<String> products = new ArrayList<>();
+    private ArrayList<String> products = new ArrayList<>();
+
 
     public String getName() {
         return name;

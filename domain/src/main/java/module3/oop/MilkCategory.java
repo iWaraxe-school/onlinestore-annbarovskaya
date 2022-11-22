@@ -1,19 +1,24 @@
 package module3.oop;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class MilkCategory {
-    private String name;
-
-    ArrayList<String> products = new ArrayList <String> ();
-
-    public MilkCategory(String name, int rate, int price) {
-        this.name = name;
+public class MilkCategory extends Category {
+    public MilkCategory() {
+        super("Milk");
     }
 
-    public String getName() { return name; }
+    private List<String> products = new ArrayList<>();
 
-    public void setName(String Name) {
-        this.name = name;
+    public String getName() {
+        return name;
+    }
+
+    public void addProduct(String product) {
+        this.products.add(product);
+    }
+
+    public void printCategory() {
     }
 }
+

@@ -11,21 +11,32 @@ public class Product {
         this.price = price;
     }
 
-    public String getName() { return name; }
+    public String getName() {
+        return name;
+    }
 
     public void setName(String Name) {
         this.name = name;
     }
 
-    public Integer getRate() {return rate; }
+    public Integer getRate() {
+        return rate;
+    }
 
     public void setRate(int Rate) {
         this.rate = rate;
     }
 
-    public Integer getPrice() {return price; }
+    public Integer getPrice() {
+        return price;
+    }
 
     public void setPrice(int price) {
         this.price = price;
+    }
+
+    @Override
+    public String toString() {
+        return productInfo;
     }
 }

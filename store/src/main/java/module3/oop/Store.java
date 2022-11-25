@@ -7,7 +7,7 @@ import java.util.List;
 public class Store {
     private List<String> categoryList = new ArrayList<>();
 
-    public void addCategory(String category) {
+    public void addCategory(Category category) {
         this.category.add(category);
     }
 

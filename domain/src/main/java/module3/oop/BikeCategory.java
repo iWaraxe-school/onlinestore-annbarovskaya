@@ -8,16 +8,4 @@ public class BikeCategory extends Category {
         super("Bikes");
     }
 
-    private List<String> products = new ArrayList<>();
-
-    public String getName() {
-        return name;
-    }
-
-    public void addProduct(String product) {
-        this.products.add(product);
-    }
-
-    public void printCategory() {
-    }
 }

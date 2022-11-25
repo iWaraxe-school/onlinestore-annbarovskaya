@@ -4,6 +4,7 @@ public class Product {
     private String name;
     private int rate;
     private int price;
+    private String productInfo;
 
     public Product(String name, int rate, int price) {
         this.name = name;
@@ -37,6 +38,7 @@ public class Product {
 
     @Override
     public String toString() {
-        return productInfo;
+        return productInfo = String.format("Name: %s, Price: %s, Rate: %s", name, price, rate);
     }
+
 }

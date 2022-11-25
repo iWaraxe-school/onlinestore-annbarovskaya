@@ -6,14 +6,14 @@ import java.util.List;
 public class Category {
     private String name;
 
-    private ArrayList<String> products = new ArrayList<>();
+    private List<Product> products = new ArrayList<>();
 
 
     public String getName() {
         return name;
     }
 
-    public void addProduct(String product) {
+    public void addProduct(Product product) {
         this.products.add(product);
     }
 

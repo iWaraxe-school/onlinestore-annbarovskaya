@@ -19,4 +19,7 @@ public class Category {
 
     public void printCategory() {
     }
+
+    public void addProductToCategory(Product product) {
+    }
 }

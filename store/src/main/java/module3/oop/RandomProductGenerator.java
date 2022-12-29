@@ -29,5 +29,6 @@ public class RandomProductGenerator {
     }
 
     public Product generateProduct(String name) {
+        return new Product(generateProductName(name), generatePrice(), generateRate());
     }
 }

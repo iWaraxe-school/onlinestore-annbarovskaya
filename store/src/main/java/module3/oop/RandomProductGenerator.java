@@ -27,4 +27,8 @@ public class RandomProductGenerator {
     private double generateRate() {
         return faker.number().randomDouble(1, 0, 5);
     }
+
+    public Product generateProduct(String name) {
+        return new Product(generateProductName(name), generatePrice(), generateRate());
+    }
 }

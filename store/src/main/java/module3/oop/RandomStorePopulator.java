@@ -17,7 +17,7 @@ public class RandomStorePopulator {
         this.store = store;
     }
 
-    public void populateStore() {
+        public void populateStore() {
         RandomProductGenerator generator = new RandomProductGenerator();
 
         Set<Category> categorySet = createCategorySet();
@@ -50,4 +50,4 @@ public class RandomStorePopulator {
         }
         return categorySet;
     }
-}
+   }

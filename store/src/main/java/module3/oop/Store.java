@@ -11,6 +11,9 @@ public class Store {
         this.category.add(category);
     }
 
-    public void printCategory() {
+    public void printCategoriesAndProducts() {
+        for (Category category : categoryList) {
+            category.printCategory();
+        }
     }
 }

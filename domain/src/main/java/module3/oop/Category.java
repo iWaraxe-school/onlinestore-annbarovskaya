@@ -18,6 +18,10 @@ public class Category {
     }
 
     public void printCategory() {
+        System.out.println("Category: " + name + ".");
+        for (Product product : products) {
+            System.out.println(product);
+        }
     }
 
 }

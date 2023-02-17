@@ -8,7 +8,7 @@ public class Store {
     private List<Category> categoryList = new ArrayList<>();
 
     public void addCategory(Category category) {
-        this.category.add(category);
+        this.categoryList.add(category);
     }
 
     public void printCategoriesAndProducts() {

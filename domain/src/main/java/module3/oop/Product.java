@@ -2,8 +2,8 @@ package module3.oop;
 
 public class Product {
     private String name;
-    private int rate;
-    private int price;
+    private double rate;
+    private double price;
     private String productInfo;
 
     public Product(String name, double rate, double price) {
@@ -20,7 +20,7 @@ public class Product {
         this.name = name;
     }
 
-    public Integer getRate() {
+    public double getRate() {
         return rate;
     }
 
@@ -28,7 +28,7 @@ public class Product {
         this.rate = rate;
     }
 
-    public Integer getPrice() {
+    public double getPrice() {
         return price;
     }
 

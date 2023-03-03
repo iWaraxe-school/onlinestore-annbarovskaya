@@ -16,4 +16,9 @@ public class Store {
             category.printCategory();
         }
     }
+    public void List<Product> allProducts;
+    allProducts.sort(new ProductComparator());
+    for (Product product: allProducts){
+        System.out.println(product)
+    }
 }

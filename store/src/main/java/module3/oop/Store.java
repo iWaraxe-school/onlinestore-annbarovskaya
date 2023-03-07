@@ -16,4 +16,15 @@ public class Store {
             category.printCategory();
         }
     }
+    public void sortAllProducts() {
+        ProductComparator comparator = new ProductComparator();
+        List<Product> allProducts = new ArrayList<>();
+        for(Category category : categoryList) {
+            allProducts.addAll(category.getProducts())
+        }
+        allProducts.sort(comparator);
+        for (Product product : allProducts) {
+            System.out.println(product);
+        }
+    }
 }

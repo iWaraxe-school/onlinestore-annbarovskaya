@@ -1,14 +1,14 @@
 package by.issoft;
 
+import module3.oop.OnlineStore;
 import module3.oop.RandomStorePopulator;
-import module3.oop.Store;
 import xml.parser.XMLParser;
 
 import java.util.Map;
 
 public class StoreApp {
     public static void main(String[] args) {
-        Store onlineStore = new Store();
+        OnlineStore onlineStore = new OnlineStore();
         RandomStorePopulator randomstorepopulator = new RandomStorePopulator(onlineStore);
         randomstorepopulator.populateStore();
         onlineStore.printCategoriesAndProducts();

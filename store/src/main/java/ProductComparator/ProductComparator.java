@@ -1,4 +1,9 @@
+package ProductComparator;
+
 import module3.oop.Product;
+
+import java.util.Comparator;
+import java.util.Map;
 
 public class ProductComparator implements Comparator<Product> {
     private final Map<String, String> configMap;

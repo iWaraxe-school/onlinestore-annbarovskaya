@@ -1,6 +1,7 @@
 package module3.oop;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class Category {
@@ -13,6 +14,10 @@ public class Category {
         return name;
     }
 
+    public List<Product> getProducts() {
+        return products;
+    }
+
     public void addProduct(Product product) {
         this.products.add(product);
     }
@@ -23,5 +28,4 @@ public class Category {
             System.out.println(product);
         }
     }
-
 }

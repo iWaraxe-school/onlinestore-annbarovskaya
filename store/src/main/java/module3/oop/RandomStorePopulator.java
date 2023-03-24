@@ -11,10 +11,10 @@ import static org.reflections.scanners.Scanners.SubTypes;
 
 
 public class RandomStorePopulator {
-    Store store;
+    OnlineStore onlineStore;
 
-    public RandomStorePopulator(Store store) {
-        this.store = store;
+    public RandomStorePopulator(OnlineStore onlineStore) {
+        this.onlineStore = onlineStore;
     }
 
         public void populateStore() {

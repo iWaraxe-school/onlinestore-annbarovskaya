@@ -11,7 +11,6 @@ import java.util.Map;
 
 public class OnlineStore {
     private List<Category> categoryList = new ArrayList<>();
-
     public void addCategory(Category category) {
         this.categoryList.add(category);
     }

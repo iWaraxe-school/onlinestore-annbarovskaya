@@ -34,10 +34,12 @@ public class StoreApp {
         System.out.println(stringStringMap);
 
     }
-public StoreApp(Store store, RandomStorePopulator randomStorePopulator){
+
+    public StoreApp(Store store, RandomStorePopulator randomStorePopulator) {
         this.store = store;
-    this.randomStorePopulator = randomStorePopulator;
-}
+        this.randomStorePopulator = randomStorePopulator;
+    }
+
     public void run() {
         ProductComparatorStream ProductComparator = new ProductComparatorStream(store);
         randomStorePopulator.populateStore();
@@ -48,11 +50,11 @@ public StoreApp(Store store, RandomStorePopulator randomStorePopulator){
                 String command = reader.readLine();
                 switch (command) {
                     case COMMAND_TOP:
-                        ProductComparator.printTopProducts();
+                        OnlineStore.sortProductsByPrice();
                         break;
                     case COMMAND_SORT:
                         try {
-                           OnlineStore.printProductsByXML(PATH_CONFIG_XML);
+                            OnlineStore.sortProductsByXML(PATH_CONFIG_XML);
                         } catch (Exception e) {
                             System.out.println("Failed to sort products:" + e.getMessage());
                         }
@@ -67,8 +69,8 @@ public StoreApp(Store store, RandomStorePopulator randomStorePopulator){
                         System.out.println("Command is not recognized");
                         break;
                 }
-            }}
-            catch (IOException e) {
+            }
+        } catch (IOException e) {
             System.out.println("Failed to read input: " + e.getMessage());
         }
 

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PhoneCategory extends Category {
-    private PhoneCategory() {
+    public PhoneCategory() {
         super("Phones");
     }
 

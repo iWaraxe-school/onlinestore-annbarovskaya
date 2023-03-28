@@ -21,7 +21,7 @@ public class RandomStorePopulator {
         RandomProductGenerator generator = new RandomProductGenerator();
 
         Set<Category> categorySet = createCategorySet();
-        for (Category category : CategorySet) {
+        for (Category category : categorySet) {
             for (int i = 0; i < new Random().nextInt(10) + 1; i++) {
                 Product product = generator.generateProduct(category.getName());
                 category.addProduct(product);

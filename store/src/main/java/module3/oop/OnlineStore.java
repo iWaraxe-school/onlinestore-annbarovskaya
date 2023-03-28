@@ -42,7 +42,6 @@ public class OnlineStore {
         for (Product product : allProducts) {
             System.out.println(product);
         }
-    }
     public void sortProductsByPrice() {
         Map<String, String> configMap = new HashMap<>();
         configMap.put("price", "desc");

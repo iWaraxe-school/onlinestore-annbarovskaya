@@ -1,5 +1,6 @@
 package by.issoft;
 
+import ProductComparator.ProductComparator;
 import module3.oop.RandomStorePopulator;
 import module3.oop.OnlineStore;
 import org.reflections.Store;
@@ -11,16 +12,11 @@ import java.io.InputStreamReader;
 import java.util.Map;
 
 public class StoreApp {
-    public static void
-    final String PATH_CONFIG_XML = "src/main/resources/config.xml";
-    public static void
-    final String COMMAND_TOP = "top";
-    public static void
-    final String COMMAND_SORT = "sort";
-    public static void
-    final String COMMAND_PRINT = "print";
-    public static void
-    final String COMMAND_QUIT = "quit";
+    private static final String PATH_CONFIG_XML = "src/main/resources/config.xml";
+    private static final String COMMAND_TOP = "top";
+    private static final String COMMAND_SORT = "sort";
+    private static final String COMMAND_PRINT = "print";
+    private static final String COMMAND_QUIT = "quit";
 
     private final Store store;
     private final RandomStorePopulator randomStorePopulator;
@@ -28,6 +24,8 @@ public class StoreApp {
     public static void main(String[] args) {
         OnlineStore onlineStore = new OnlineStore();
         RandomStorePopulator randomstorepopulator = new RandomStorePopulator(onlineStore);
+        StoreApp storeApp = new StoreApp(onlineStore, RandomStorePopulator);
+        storeApp.run();
         randomstorepopulator.populateStore();
         onlineStore.printCategoriesAndProducts();
         Map<String, String> stringStringMap = XMLParser.xmlHandler();
@@ -41,7 +39,7 @@ public class StoreApp {
     }
 
     public void run() {
-        ProductComparatorStream ProductComparator = new ProductComparatorStream(store);
+        ProductComparator ProductComparator = new ProductComparator(store);
         randomStorePopulator.populateStore();
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
             boolean flag = true;

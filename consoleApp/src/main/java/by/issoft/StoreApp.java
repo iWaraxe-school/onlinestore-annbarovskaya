@@ -1,9 +1,8 @@
 package by.issoft;
 
-import ProductComparator.ProductComparator;
+import module3.oop.ProductComparator;
 import module3.oop.RandomStorePopulator;
 import module3.oop.OnlineStore;
-import org.reflections.Store;
 import xml.parser.XMLParser;
 
 import java.io.BufferedReader;
@@ -18,22 +17,22 @@ public class StoreApp {
     private static final String COMMAND_PRINT = "print";
     private static final String COMMAND_QUIT = "quit";
 
-    private final Store store;
+    private final OnlineStore store;
     private final RandomStorePopulator randomStorePopulator;
 
-    public static void main(String[] args) {
+    public void allStore (){
         OnlineStore onlineStore = new OnlineStore();
         RandomStorePopulator randomstorepopulator = new RandomStorePopulator(onlineStore);
         StoreApp storeApp = new StoreApp(onlineStore, RandomStorePopulator);
         storeApp.run();
         randomstorepopulator.populateStore();
         onlineStore.printCategoriesAndProducts();
-        Map<String, String> stringStringMap = XMLParser.xmlHandler();
+        Map<String, String> stringStringMap = XMLParser.xmlHandler("src/main/resources/config.xml");
         System.out.println(stringStringMap);
 
     }
 
-    public StoreApp(Store store, RandomStorePopulator randomStorePopulator) {
+    public StoreApp(OnlineStore store, RandomStorePopulator randomStorePopulator) {
         this.store = store;
         this.randomStorePopulator = randomStorePopulator;
     }
@@ -52,7 +51,7 @@ public class StoreApp {
                         break;
                     case COMMAND_SORT:
                         try {
-                            OnlineStore.sortProductsByXML(PATH_CONFIG_XML);
+                            OnlineStore.sortProductsByXML();
                         } catch (Exception e) {
                             System.out.println("Failed to sort products:" + e.getMessage());
                         }

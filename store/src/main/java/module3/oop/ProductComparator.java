@@ -1,6 +1,4 @@
-package ProductComparator;
-
-import module3.oop.Product;
+package module3.oop;
 
 import java.util.Comparator;
 import java.util.Map;

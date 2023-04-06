@@ -15,13 +15,13 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class XMLParser {
-    public static Map<String, String> xmlHandler() {
+    public static Map<String, String> xmlHandler(String s) {
         Map<String, String> configMap = new LinkedHashMap<String, String>();
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder dBuilder = null;
         Document doc = null;
         try {
-            File inputFile = new File("config.xml");
+            File inputFile = new File("src/main/resources/config.xml");
             dBuilder = dbFactory.newDocumentBuilder();
             doc = dBuilder.parse(inputFile);
 

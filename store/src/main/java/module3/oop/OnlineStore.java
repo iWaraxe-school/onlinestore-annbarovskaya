@@ -33,7 +33,7 @@ public class OnlineStore {
         }
     }
 
-    public static void sortProductsByXML(String "src/main/resources/config.xml") {
+    public void sortProductsByXML() {
         Map<String, String> configMap = XMLParser.xmlHandler("src/main/resources/config.xml");
         ProductComparator comparator = new ProductComparator(configMap);
         List<Product> allProducts = new ArrayList<>();
@@ -46,7 +46,7 @@ public class OnlineStore {
         }
     }
 
-    public static void sortProductsByPrice(String "src/main/resources/config.xml") {
+    public void sortProductsByPrice() {
         Map<String, String> configMap = new HashMap<>();
         configMap.put("price", "desc");
         ProductComparator comparator = new ProductComparator(configMap);

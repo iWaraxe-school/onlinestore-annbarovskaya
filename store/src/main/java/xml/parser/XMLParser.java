@@ -21,7 +21,7 @@ public class XMLParser {
         DocumentBuilder dBuilder = null;
         Document doc = null;
         try {
-            File inputFile = new File("src/main/resources/config.xml");
+            File inputFile = new File(s);
             dBuilder = dbFactory.newDocumentBuilder();
             doc = dBuilder.parse(inputFile);
 

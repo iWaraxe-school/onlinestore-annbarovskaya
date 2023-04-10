@@ -23,7 +23,7 @@ public class StoreApp {
     public void allStore (){
         OnlineStore onlineStore = new OnlineStore();
         RandomStorePopulator randomstorepopulator = new RandomStorePopulator(onlineStore);
-        StoreApp storeApp = new StoreApp(onlineStore, RandomStorePopulator);
+        StoreApp storeApp = new StoreApp(onlineStore, randomstorepopulator);
         storeApp.run();
         randomstorepopulator.populateStore();
         onlineStore.printCategoriesAndProducts();
@@ -47,11 +47,11 @@ public class StoreApp {
                 String command = reader.readLine();
                 switch (command) {
                     case COMMAND_TOP:
-                        OnlineStore.sortProductsByPrice();
+                        store.sortProductsByPrice();
                         break;
                     case COMMAND_SORT:
                         try {
-                            OnlineStore.sortProductsByXML();
+                            store.sortProductsByXML();
                         } catch (Exception e) {
                             System.out.println("Failed to sort products:" + e.getMessage());
                         }

@@ -1,6 +1,7 @@
 package module3.oop;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class Category {
@@ -8,9 +9,16 @@ public class Category {
 
     private List<Product> products = new ArrayList<>();
 
+    public Category(String name) {
+        this.name = name;
+    }
 
     public String getName() {
         return name;
+    }
+
+    public List<Product> getProducts() {
+        return products;
     }
 
     public void addProduct(Product product) {
@@ -23,5 +31,4 @@ public class Category {
             System.out.println(product);
         }
     }
-
 }

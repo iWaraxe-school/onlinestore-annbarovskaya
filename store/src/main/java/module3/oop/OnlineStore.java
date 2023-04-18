@@ -9,6 +9,7 @@ import java.util.Map;
 
 
 public class OnlineStore {
+    public static final byte MAX_NUMBER_OF_PRODUCTS = 5;
     private static List<Category> categoryList = new ArrayList<>();
 
     public void addCategory(Category category) {
@@ -21,25 +22,17 @@ public class OnlineStore {
         }
     }
 
-    public void sortAllProducts() {
-        ProductComparator comparator = new ProductComparator();
-        List<Product> allProducts = new ArrayList<>();
-        for (Category category : categoryList) {
-            allProducts.addAll(category.getProducts())
-        }
-        allProducts.sort(comparator);
-        for (Product product : allProducts) {
-            System.out.println(product);
-        }
-    }
-
-    public void sortProductsByXML() {
-        Map<String, String> configMap = XMLParser.xmlHandler("src/main/resources/config.xml");
-        ProductComparator comparator = new ProductComparator(configMap);
+    public List<Product> allStoreProducts() {
         List<Product> allProducts = new ArrayList<>();
         for (Category category : categoryList) {
             allProducts.addAll(category.getProducts());
         }
+        return allProducts;
+    }
+        public void sortProductsByXML() {
+        Map<String, String> configMap = XMLParser.xmlHandler("src/main/resources/config.xml");
+        ProductComparator comparator = new ProductComparator(configMap);
+        List<Product> allProducts = allStoreProducts();
         allProducts.sort(comparator);
         for (Product product : allProducts) {
             System.out.println(product);
@@ -50,12 +43,9 @@ public class OnlineStore {
         Map<String, String> configMap = new HashMap<>();
         configMap.put("price", "desc");
         ProductComparator comparator = new ProductComparator(configMap);
-        List<Product> allProducts = new ArrayList<>();
-        for (Category category : categoryList) {
-            allProducts.addAll(category.getProducts());
-        }
+        List<Product> allProducts = allStoreProducts();
         allProducts.sort(comparator);
-        for (Product product : allProducts) {
+        for (Product product : allProducts.subList(0,MAX_NUMBER_OF_PRODUCTS)) {
             System.out.println(product);
         }
     }

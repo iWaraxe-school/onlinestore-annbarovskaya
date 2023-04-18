@@ -20,7 +20,7 @@ public class StoreApp {
     private final OnlineStore store;
     private final RandomStorePopulator randomStorePopulator;
 
-    public void allStore (){
+    public static void main (String[] args) {
         OnlineStore onlineStore = new OnlineStore();
         RandomStorePopulator randomstorepopulator = new RandomStorePopulator(onlineStore);
         StoreApp storeApp = new StoreApp(onlineStore, randomstorepopulator);
@@ -38,12 +38,11 @@ public class StoreApp {
     }
 
     public void run() {
-        ProductComparator ProductComparator = new ProductComparator(store);
         randomStorePopulator.populateStore();
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
             boolean flag = true;
             while (flag) {
-                System.out.println("Enter command: print/chart/sort/quit");
+                System.out.println("Enter command: print/top/sort/quit");
                 String command = reader.readLine();
                 switch (command) {
                     case COMMAND_TOP:
@@ -57,7 +56,7 @@ public class StoreApp {
                         }
                         break;
                     case COMMAND_PRINT:
-                        OnlineStore.printCategoriesAndProducts();
+                        store.printCategoriesAndProducts();
                         break;
                     case COMMAND_QUIT:
                         flag = false;

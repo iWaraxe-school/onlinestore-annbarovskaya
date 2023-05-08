@@ -29,7 +29,8 @@ public class OnlineStore {
         }
         return allProducts;
     }
-        public void sortProductsByXML() {
+
+    public void sortProductsByXML() {
         Map<String, String> configMap = XMLParser.xmlHandler("src/main/resources/config.xml");
         ProductComparator comparator = new ProductComparator(configMap);
         List<Product> allProducts = allStoreProducts();
@@ -45,8 +46,19 @@ public class OnlineStore {
         ProductComparator comparator = new ProductComparator(configMap);
         List<Product> allProducts = allStoreProducts();
         allProducts.sort(comparator);
-        for (Product product : allProducts.subList(0,MAX_NUMBER_OF_PRODUCTS)) {
+        for (Product product : allProducts.subList(0, MAX_NUMBER_OF_PRODUCTS)) {
             System.out.println(product);
+        }
+    }
+
+    public static class onlineStoreEE {
+        private static final onlineStoreEE INSTANCE = new onlineStoreEE();
+
+        private onlineStoreEE() {
+        }
+
+        public static onlineStoreEE getInstance() {
+            return INSTANCE;
         }
     }
 

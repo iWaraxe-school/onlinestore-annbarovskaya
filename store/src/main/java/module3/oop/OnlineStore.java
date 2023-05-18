@@ -12,6 +12,7 @@ public class OnlineStore {
     public static final byte MAX_NUMBER_OF_PRODUCTS = 5;
     private static List<Category> categoryList = new ArrayList<>();
 
+    private static final OnlineStore INSTANCE = new OnlineStore();
     public void addCategory(Category category) {
         this.categoryList.add(category);
     }
@@ -50,16 +51,10 @@ public class OnlineStore {
             System.out.println(product);
         }
     }
-
-    public static class onlineStoreEE {
-        private static final onlineStoreEE INSTANCE = new onlineStoreEE();
-
-        private onlineStoreEE() {
-        }
-
-        public static onlineStoreEE getInstance() {
-            return INSTANCE;
-        }
+    private OnlineStore() {
     }
 
+    public static OnlineStore getInstance() {
+        return INSTANCE;
+    }
 }

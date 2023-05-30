@@ -12,7 +12,7 @@ public class CategoryFactory {
     }};
 
     public Category createCategory(String name) {
-        return CATEGORY_MAP.getOrDefault(name, null).get();
-
+        Supplier<Category> supplier = CATEGORY_MAP.get(name);
+        return (supplier != null) ? supplier.get() : null;
     }
 }

@@ -13,6 +13,7 @@ public class OnlineStore {
     private static List<Category> categoryList = new ArrayList<>();
 
     private static final OnlineStore INSTANCE = new OnlineStore();
+
     public void addCategory(Category category) {
         this.categoryList.add(category);
     }

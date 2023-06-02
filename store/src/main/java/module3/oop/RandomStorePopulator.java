@@ -36,7 +36,8 @@ public class RandomStorePopulator {
         for (Class subType : subTypes) {
             Category category = null;
             try {
-                category = (Category) subType.getConstructor().newInstance();
+                CategoryFactory categoryFactory = new CategoryFactory();
+                category = categoryFactory.createCategory(subType.getName());
             } catch (InstantiationException e) {
                 throw new RuntimeException(e);
             } catch (IllegalAccessException e) {

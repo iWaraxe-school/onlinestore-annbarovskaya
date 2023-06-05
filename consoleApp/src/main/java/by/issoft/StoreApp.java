@@ -1,5 +1,6 @@
 package by.issoft;
 
+import module3.oop.CategoryFactory;
 import module3.oop.ProductComparator;
 import module3.oop.RandomStorePopulator;
 import module3.oop.OnlineStore;
@@ -21,12 +22,11 @@ public class StoreApp {
     private final RandomStorePopulator randomStorePopulator;
 
     public static void main (String[] args) {
-        OnlineStore onlineStore = new OnlineStore();
+        OnlineStore onlineStore = OnlineStore.getInstance();
+        CategoryFactory categoryFactory = new CategoryFactory();
         RandomStorePopulator randomstorepopulator = new RandomStorePopulator(onlineStore);
         StoreApp storeApp = new StoreApp(onlineStore, randomstorepopulator);
         storeApp.run();
-        randomstorepopulator.populateStore();
-        onlineStore.printCategoriesAndProducts();
         Map<String, String> stringStringMap = XMLParser.xmlHandler("src/main/resources/config.xml");
         System.out.println(stringStringMap);
 
@@ -39,6 +39,8 @@ public class StoreApp {
 
     public void run() {
         randomStorePopulator.populateStore();
+        randomstorepopulator.populateStore();
+        onlineStore.printCategoriesAndProducts();
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
             boolean flag = true;
             while (flag) {
@@ -66,7 +68,8 @@ public class StoreApp {
                         break;
                 }
             }
-        } catch (IOException e) {
+        }
+        catch (IOException e) {
             System.out.println("Failed to read input: " + e.getMessage());
         }
 

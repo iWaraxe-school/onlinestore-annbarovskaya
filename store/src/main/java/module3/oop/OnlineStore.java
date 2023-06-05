@@ -12,6 +12,8 @@ public class OnlineStore {
     public static final byte MAX_NUMBER_OF_PRODUCTS = 5;
     private static List<Category> categoryList = new ArrayList<>();
 
+    private static final OnlineStore INSTANCE = new OnlineStore();
+
     public void addCategory(Category category) {
         this.categoryList.add(category);
     }
@@ -29,7 +31,8 @@ public class OnlineStore {
         }
         return allProducts;
     }
-        public void sortProductsByXML() {
+
+    public void sortProductsByXML() {
         Map<String, String> configMap = XMLParser.xmlHandler("src/main/resources/config.xml");
         ProductComparator comparator = new ProductComparator(configMap);
         List<Product> allProducts = allStoreProducts();
@@ -45,9 +48,14 @@ public class OnlineStore {
         ProductComparator comparator = new ProductComparator(configMap);
         List<Product> allProducts = allStoreProducts();
         allProducts.sort(comparator);
-        for (Product product : allProducts.subList(0,MAX_NUMBER_OF_PRODUCTS)) {
+        for (Product product : allProducts.subList(0, MAX_NUMBER_OF_PRODUCTS)) {
             System.out.println(product);
         }
     }
+    private OnlineStore() {
+    }
 
+    public static OnlineStore getInstance() {
+        return INSTANCE;
+    }
 }

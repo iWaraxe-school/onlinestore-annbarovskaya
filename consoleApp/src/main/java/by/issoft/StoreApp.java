@@ -1,15 +1,15 @@
 package by.issoft;
 
-import module3.oop.CategoryFactory;
-import module3.oop.ProductComparator;
-import module3.oop.RandomStorePopulator;
-import module3.oop.OnlineStore;
+import module3.oop.*;
+import threads.ClearOrders;
 import xml.parser.XMLParser;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Map;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.BlockingQueue;
 
 public class StoreApp {
     private static final String PATH_CONFIG_XML = "src/main/resources/config.xml";
@@ -31,6 +31,10 @@ public class StoreApp {
         System.out.println(stringStringMap);
 
     }
+    BlockingQueue<Product> orderQueue = new ArrayBlockingQueue<>(10);
+    Runnable clearOrders = new ClearOrders(orderQueue);
+    new Thread(clearOrders).start();
+    BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
     public StoreApp(OnlineStore store, RandomStorePopulator randomStorePopulator) {
         this.store = store;
@@ -56,6 +60,10 @@ public class StoreApp {
                         } catch (Exception e) {
                             System.out.println("Failed to sort products:" + e.getMessage());
                         }
+                        break;
+                    case "order":
+                        Runnable createOrder = new CreateOrder(orderQueue);
+                        new Thread(createOrder).start();
                         break;
                     case COMMAND_PRINT:
                         store.printCategoriesAndProducts();

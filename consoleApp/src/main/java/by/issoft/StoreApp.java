@@ -43,8 +43,7 @@ public class StoreApp {
 
     public void run() {
         randomStorePopulator.populateStore();
-        randomstorepopulator.populateStore();
-        onlineStore.printCategoriesAndProducts();
+        store.printCategoriesAndProducts();
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
             boolean flag = true;
             while (flag) {

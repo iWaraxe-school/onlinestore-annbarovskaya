@@ -1,7 +1,8 @@
 package by.issoft;
 
 import module3.oop.*;
-import threads.ClearOrders;
+import threads.ClearOrder;
+import threads.CreateOrder;
 import xml.parser.XMLParser;
 
 import java.io.BufferedReader;
@@ -32,8 +33,8 @@ public class StoreApp {
 
     }
     BlockingQueue<Product> orderQueue = new ArrayBlockingQueue<>(10);
-    Runnable clearOrders = new ClearOrders(orderQueue);
-    new Thread(clearOrders).start();
+    Runnable clearOrder = new ClearOrder(orderQueue);
+    new Thread(clearOrder).start();
     BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
     public StoreApp(OnlineStore store, RandomStorePopulator randomStorePopulator) {

@@ -20,7 +20,8 @@ public class CreateOrder implements Runnable {
                 System.out.println("Thread name: " + Thread.currentThread().getName());
                 int size = purchaseProductQueue.size();
                 if (size > 0) {
-                    purchaseProductQueue.add(Product);
+                    Product product = new Product();
+                    purchaseProductQueue.add(product);
                     System.out.println("Cart created, " + size + " products added");
                 }
                 TimeUnit.MINUTES.sleep(1);

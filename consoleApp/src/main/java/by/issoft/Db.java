@@ -6,8 +6,8 @@ import java.sql.*;
 
 public class Db {
     static Connection CONNECTION = null;
-    static Statement STATEMENT = null;
-    static Statement STATEMENT_ENCLOSED = null;
+    static Statement PreparedStatement = null;
+    static Statement PreparedStatement_Enclosed = null;
     static ResultSet RESULTSET = null;
     static ResultSet RESULTSET_ENCLOSED = null;
 
@@ -32,8 +32,8 @@ public class Db {
         try {
             CONNECTION = DriverManager.getConnection(URL, USER, PASSWORD);
             System.out.println("\nDatabase connection successful\n");
-            STATEMENT = CONNECTION.createStatement();
-            STATEMENT_ENCLOSED = CONNECTION.createStatement();
+            PreparedStatement = CONNECTION.createStatement();
+            PreparedStatement_Enclosed = CONNECTION.createStatement();
 
         } catch (SQLException e){
             throw new RuntimeException(e);
@@ -44,24 +44,24 @@ public class Db {
         String query2 = "DROP TABLE IF EXISTS PRODUCTS;";
         String query3 = "DROP TABLE IF EXISTS ORDERS;";
         try {
-            STATEMENT.executeUpdate(query2);
-            STATEMENT.executeUpdate(query1);
-            STATEMENT.executeUpdate(query3);
+            PreparedStatement.executeUpdate(query2);
+            PreparedStatement.executeUpdate(query1);
+            PreparedStatement.executeUpdate(query3);
         } catch (SQLException e) {
     }}
         public void createCategoryTable() {
-        String query = "CREATE TABLE IF NOT EXIST CATEGORIES {" +
+        String query = "CREATE TABLE IF NOT EXISTS CATEGORIES {" +
                 "ID INT PRIMARY KEY AUTO_INCREMENT NOT NULL," +
                 "NAME VARCHAR(255) NOT NULL);";
-        try {STATEMENT.executeUpdate(query);
+        try {PreparedStatement.executeUpdate(query);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } }
     public void createProductTable() {
-        String query = "CREATE TABLE IF NOT EXIST PRODUCTS {" +
+        String query = "CREATE TABLE IF NOT EXISTS PRODUCTS {" +
                 "ID INT PRIMARY KEY AUTO_INCREMENT NOT NULL," +
                 "NAME VARCHAR(255) NOT NULL);";
-        try {STATEMENT.executeUpdate(query);
+        try {PreparedStatement.executeUpdate(query);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } }

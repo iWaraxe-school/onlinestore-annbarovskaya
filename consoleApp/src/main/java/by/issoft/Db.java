@@ -1,8 +1,16 @@
 package by.issoft;
 
+import module3.oop.Category;
+import module3.oop.RandomProductGenerator;
 import org.reflections.Store;
 
+import java.io.IOException;
 import java.sql.*;
+import java.util.Properties;
+import java.util.Random;
+import java.util.Set;
+
+import static com.mysql.cj.conf.PropertyKey.logger;
 
 public class Db {
     static Connection CONNECTION = null;
@@ -26,17 +34,22 @@ public class Db {
         clearDb();
         createCategoryTable();
         createProductTable();
-        
+
     }
+
     public void connectToDb() {
         try {
-            CONNECTION = DriverManager.getConnection(URL, USER, PASSWORD);
-            System.out.println("\nDatabase connection successful\n");
-            PreparedStatement = CONNECTION.createStatement();
-            PreparedStatement_Enclosed = CONNECTION.createStatement();
+            Properties properties = new LoadProperties().loadProperties();
+            this.url = properties.getProperty("db.url");
+            this.username = properties.getProperty("db.username");
+            this.password = properties.getProperty("db.password");
 
-        } catch (SQLException e){
+        } catch (SQLException e) {
             throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            logger.error("Database Connection Creation Failed", e);
+        } catch (IOException e) {
+            logger.error("Load Properties Operation Failed", e);
         }
     }
     public void clearDb() {
@@ -50,7 +63,7 @@ public class Db {
         } catch (SQLException e) {
     }}
         public void createCategoryTable() {
-        String query = "CREATE TABLE IF NOT EXISTS CATEGORIES {" +
+        String query = "CREATE TABLE IF NOT EXISTS CATEGORIES (" +
                 "ID INT PRIMARY KEY AUTO_INCREMENT NOT NULL," +
                 "NAME VARCHAR(255) NOT NULL);";
         try {PreparedStatement.executeUpdate(query);
@@ -58,11 +71,41 @@ public class Db {
             throw new RuntimeException(e);
         } }
     public void createProductTable() {
-        String query = "CREATE TABLE IF NOT EXISTS PRODUCTS {" +
+        String query = "CREATE TABLE IF NOT EXISTS PRODUCTS (" +
                 "ID INT PRIMARY KEY AUTO_INCREMENT NOT NULL," +
                 "NAME VARCHAR(255) NOT NULL);";
         try {PreparedStatement.executeUpdate(query);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } }
+    public void fillStoreRandom() {
+        RandomProductGenerator generator = new RandomProductGenerator();
+        Set<Category> categorySet = createCategorySet();
+
+        int j = 1;
+        for (Category category:categorySet) {
+            System.out.println("Insert category " + category.getName() + "into database");
+            try {
+                PreparedStatement insertCategories = CONNECTION.prepareStatement("INSERT INTO CATEGORIES(NAME) VALUES(?)");
+                insertCategories.setString(1, category.getName().toString());
+                System.out.println(insertCategories);
+                insertCategories.execute();
+
+                Random randomProductAmountToAdd = new Random();
+                for (int i = 0; i < randomProductAmountToAdd.nextInt(10) + 1; i++) {
+                    PreparedStatement insertProduct = CONNECTION.prepareStatement("INSERT INTO PRODUCTS(category_id, name, rate, price) VALUES (?, ?, ?, ?)");
+                    insertProduct.setInt(1, j);
+                    insertProduct.setString(2, generator.generateName(category.getId()));
+                    insertProduct.setDouble(3, generator.generateRate());
+                    insertProduct.setDouble(4, generator.generatePrice());
+                    System.out.println(insertProduct);
+                    insertProduct.execute();
+                    System.out.println("One more product inserted");
+                }
+            }
+            catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
 }

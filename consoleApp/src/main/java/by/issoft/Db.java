@@ -30,29 +30,18 @@ public class Db {
     }
 
     public void dBinit() {
-        connectToDb();
-        clearDb();
-        createCategoryTable();
-        createProductTable();
-
-    }
-
-    public void connectToDb() {
-        try {
-            Properties properties = new LoadProperties().loadProperties();
-            this.url = properties.getProperty("db.url");
-            this.username = properties.getProperty("db.username");
-            this.password = properties.getProperty("db.password");
+        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
+             Statement statement = connection.createStatement()) {
+            clearDb(statement);
+            createCategoryTable(statement);
+            createProductTable(statement);
 
         } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
-            logger.error("Database Connection Creation Failed", e);
-        } catch (IOException e) {
-            logger.error("Load Properties Operation Failed", e);
+            System.err.println("Error initializing connection: " + e.getMessage());
+            e.printStackTrace();
         }
     }
-    public void clearDb() {
+    public void clearDb(Statement statement) {
         String query1 = "DROP TABLE IF EXISTS CATEGORIES;";
         String query2 = "DROP TABLE IF EXISTS PRODUCTS;";
         String query3 = "DROP TABLE IF EXISTS ORDERS;";
@@ -61,29 +50,43 @@ public class Db {
             PreparedStatement.executeUpdate(query1);
             PreparedStatement.executeUpdate(query3);
         } catch (SQLException e) {
-    }}
-        public void createCategoryTable() {
+            System.err.println("Error clearing database: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    public void createCategoryTable() {
         String query = "CREATE TABLE IF NOT EXISTS CATEGORIES (" +
                 "ID INT PRIMARY KEY AUTO_INCREMENT NOT NULL," +
                 "NAME VARCHAR(255) NOT NULL);";
-        try {PreparedStatement.executeUpdate(query);
+        try {
+            PreparedStatement.executeUpdate(query);
         } catch (SQLException e) {
             throw new RuntimeException(e);
-        } }
-    public void createProductTable() {
+        }
+    }
+
+    public void createProductTable(Statement statement) {
         String query = "CREATE TABLE IF NOT EXISTS PRODUCTS (" +
                 "ID INT PRIMARY KEY AUTO_INCREMENT NOT NULL," +
-                "NAME VARCHAR(255) NOT NULL);";
-        try {PreparedStatement.executeUpdate(query);
+                "CATEGORY_ID INT NOT NULL," +
+                "NAME VARCHAR(255) NOT NULL," +
+        "RATE DECIMAL (10, 1) NOT NULL," +
+        "PRICE DECIMAL (10, 1) NOT NULL," +
+        "FOREIGN KEY (CATEGORY_ID) REFERENCES CATEGORIES());";
+        try {
+            PreparedStatement.executeUpdate(query);
         } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } }
+            System.err.println("Error creating product table: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
     public void fillStoreRandom() {
         RandomProductGenerator generator = new RandomProductGenerator();
         Set<Category> categorySet = createCategorySet();
-
         int j = 1;
-        for (Category category:categorySet) {
+        for (Category category : categorySet) {
             System.out.println("Insert category " + category.getName() + "into database");
             try {
                 PreparedStatement insertCategories = CONNECTION.prepareStatement("INSERT INTO CATEGORIES(NAME) VALUES(?)");
@@ -102,8 +105,7 @@ public class Db {
                     insertProduct.execute();
                     System.out.println("One more product inserted");
                 }
-            }
-            catch (SQLException e) {
+            } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
         }

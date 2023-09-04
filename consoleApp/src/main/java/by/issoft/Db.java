@@ -110,4 +110,22 @@ public class Db {
             }
         }
     }
+    public void printFilledStore() throws SQLException {
+        connectToDB();
+        String sql = "SELECT C.NAME CATEGORY_NAME, P.NAME, PRICE, RATE FROM PRODUCTS P JOIN CATEGORIES C ON " +
+                "C.ID = P.CATEGORY_ID";
+        PreparedStatement getProducts = CONNECTION.prepareStatement(sql);
+        ResultSet resultSet = getProducts.executeQuery(sql);
+        System.out.println("Welcome To Online Store!");
+        while (resultSet.next()) {
+            String categoryName = resultSet.getString("CATEGORY_NAME");
+            String name = resultSet.getString("NAME");
+            Double price = resultSet.getDouble("PRICE");
+            Double rate = resultSet.getDouble("RATE");
+            System.out.print("Category name: " + categoryName);
+            System.out.print(", Product name: " + name);
+            System.out.print(", Product price: " + price);
+            System.out.print(", Product rate: " + rate);
+        }
+    }
 }

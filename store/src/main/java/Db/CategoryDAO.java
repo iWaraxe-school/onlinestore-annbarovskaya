@@ -1,5 +1,6 @@
-package by.issoft;
+package Db;
 
+import Db.Db;
 import module3.oop.Category;
 
 import java.sql.Connection;

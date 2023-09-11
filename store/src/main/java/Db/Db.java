@@ -1,4 +1,4 @@
-package by.issoft;
+package Db;
 
 import module3.oop.Category;
 import module3.oop.RandomProductGenerator;

@@ -2,6 +2,7 @@ package http;
 
 import com.sun.net.httpserver.HttpContext;
 import com.sun.net.httpserver.HttpServer;
+import module3.oop.Auth;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
